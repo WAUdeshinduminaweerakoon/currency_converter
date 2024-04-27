@@ -8,16 +8,30 @@ const ConvertFormComponents = () => {
     const [amountInSourceCurrency, setAmountInSourceCurrency] = useState(0);
     const [amountInTargetCurrency, setAmountInTargetCurrency] = useState(0);
 
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        console.log(
+            date,
+            setSourceCurrency,
+            targetCurrency,
+            amountInSourceCurrency
+        )
+    }
+
   return (
     <section className=' mt-5 flex items-center justify-center flex-col'>
-        <form className=' w-full lg:w-1/2'>
+        <form  onSubmit={handleSubmit} 
+          className=' w-full lg:w-1/2'>
             <div class="mb-3">
                 <label htmlFor={date}
                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-                <input type="Date" id={date} name={date} 
+                <input 
+                onChange={(e)=> setDate(e.target.value)}
+                type="Date" id={date} name={date} 
                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light" 
                 placeholder="" 
-                required />
+                required
+                 />
             </div>
             <div class="mb-3">
                 <label 
@@ -26,26 +40,34 @@ const ConvertFormComponents = () => {
                 >
                     Source Currency
                 </label>
-                <select id={sourceCurrency}
+                <select 
+                 onChange={(e)=> setSourceCurrency(e.target.value)}
+                 id={sourceCurrency}
                  name={sourceCurrency} 
                  value={sourceCurrency} 
                  class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light" 
-                required ><option value="">Select Source Currency</option></select>
+                // required 
+                ><option value="">Select Source Currency</option></select>
             </div>
             <div class="mb-3">
                 <label htmlFor={targetCurrency} class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                     Target Currency
                 </label>
-                <select id={targetCurrency}  name={targetCurrency} value={targetCurrency} class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light" 
-                required ><option value="">Select Target Currency</option></select>
+                <select 
+                onChange={(e)=> setTargetCurrency(e.target.value)}
+                id={targetCurrency}  name={targetCurrency} value={targetCurrency} class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light" 
+                //required 
+                ><option value="">Select Target Currency</option></select>
             </div>
             <div class="mb-3">
                 <label htmlFor={amountInSourceCurrency} class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                     Amount in source currency
                 </label>
-                <input type="text" 
+                <input 
+                    onChange={(e)=>setAmountInSourceCurrency(e.target.value)}
+                    type="text" 
                     id={amountInSourceCurrency} 
                     name={amountInSourceCurrency} 
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light" 
@@ -54,7 +76,7 @@ const ConvertFormComponents = () => {
                 />
             </div>
             <button
-            type='button' className='bg-green-700 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-xl '
+            type='' className='bg-green-700 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-xl '
 
             > 
               Get the target Currency</button>
