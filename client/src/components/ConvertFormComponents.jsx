@@ -10,14 +10,33 @@ const ConvertFormComponents = () => {
     const [amountInTargetCurrency, setAmountInTargetCurrency] = useState(0);
     const [currncyNames, setCurrencyNames] = useState([]);
 
-    const handleSubmit=(e)=>{
+    const handleSubmit= async(e)=>{
         e.preventDefault();
-        console.log(
-            date,
-            setSourceCurrency,
-            targetCurrency,
-            amountInSourceCurrency
-        )
+        try {
+            const responce = await axios.get("http://localhost:5000/convert",
+            {
+                params:{
+                    date,
+                    sourceCurrency,
+                    targetCurrency,
+                    amountInSourceCurrency,
+        
+                },
+
+            });
+            // TODO:set the rest......
+
+        } catch (err) {
+            console.error(err);
+            
+        }
+        // console.log(
+        //     // date,
+        //     setSourceCurrency,
+        //     // targetCurrency,
+        //     // amountInSourceCurrency
+        // )
+        // console.log(sourceCurrency);
     };
 
     //get all carrency name
@@ -64,7 +83,13 @@ const ConvertFormComponents = () => {
                  value={sourceCurrency} 
                  class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light" 
                 // required 
-                ><option value="">Select Source Currency</option></select>
+                ><option value="">Select Source Currency</option>
+                {Object.keys(currncyNames).map((currncy)=>(
+                    <option className='p-1' key={currncy} value={currncy}>
+                        {currncyNames[currncy]}
+                    </option>
+                ))}
+                </select>
             </div>
             <div class="mb-3">
                 <label htmlFor={targetCurrency} class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -75,7 +100,13 @@ const ConvertFormComponents = () => {
                 onChange={(e)=> setTargetCurrency(e.target.value)}
                 id={targetCurrency}  name={targetCurrency} value={targetCurrency} class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light" 
                 //required 
-                ><option value="">Select Target Currency</option></select>
+                ><option value="">Select Target Currency</option>
+                {Object.keys(currncyNames).map((currncy)=>(
+                    <option className='p-1' key={currncy} value={currncy}>
+                        {currncyNames[currncy]}
+                    </option>
+                ))}
+                </select>
             </div>
             <div class="mb-3">
                 <label htmlFor={amountInSourceCurrency} class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
