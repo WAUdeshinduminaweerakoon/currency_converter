@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import axios from "axios";
 
 const ConvertFormComponents = () => {
 
@@ -7,6 +8,7 @@ const ConvertFormComponents = () => {
     const [targetCurrency, setTargetCurrency] = useState("");
     const [amountInSourceCurrency, setAmountInSourceCurrency] = useState(0);
     const [amountInTargetCurrency, setAmountInTargetCurrency] = useState(0);
+    const [currncyNames, setCurrencyNames] = useState([]);
 
     const handleSubmit=(e)=>{
         e.preventDefault();
@@ -16,7 +18,22 @@ const ConvertFormComponents = () => {
             targetCurrency,
             amountInSourceCurrency
         )
-    }
+    };
+
+    //get all carrency name
+    useEffect(()=>{
+        const getCurrencyName = async()=>{
+            try {
+                const responce = await axios.get("http://localhost:5000/getAllCurrencies");
+                setCurrencyNames(responce.data);
+                
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        getCurrencyName();
+
+    },[])
 
   return (
     <section className=' mt-5 flex items-center justify-center flex-col'>
