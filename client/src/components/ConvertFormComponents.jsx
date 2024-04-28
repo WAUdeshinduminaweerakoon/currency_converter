@@ -129,7 +129,12 @@ const ConvertFormComponents = () => {
             > 
               Get the target Currency</button>
         </form>
-        {amountInTargetCurrency}
+        <div>
+            <section className=' mt-5 text-gray-100'>
+                {amountInSourceCurrency} {currncyNames[sourceCurrency]} is equals to{" "}
+                <span className=' text-green-400 font-bold'>{amountInTargetCurrency}</span> in  {currncyNames[targetCurrency]}
+            </section>
+        </div>
     </section>
   )
 }
