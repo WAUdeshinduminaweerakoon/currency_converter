@@ -19,12 +19,12 @@ const ConvertFormComponents = () => {
                     date,
                     sourceCurrency,
                     targetCurrency,
-                    amountInSourceCurrency,
+                    amountInSourceCurrency
         
                 },
 
             });
-            // TODO:set the rest......
+            setAmountInTargetCurrency(responce.data);
 
         } catch (err) {
             console.error(err);
@@ -129,6 +129,7 @@ const ConvertFormComponents = () => {
             > 
               Get the target Currency</button>
         </form>
+        {amountInTargetCurrency}
     </section>
   )
 }
